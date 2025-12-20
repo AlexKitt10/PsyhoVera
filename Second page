@@ -33,6 +33,14 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow "> <div class=" t-input-
 
 const OLLAMA_SERVER = 'http://62.109.8.203:11434';
 const MODEL_NAME = 'llama3.2:3b';
+const SYSTEM_PROMPT = `Ты - русскоязычный психологический ассистент Vera Psyho. 
+Твоя задача - отвечать на психологические вопросы клиентов.
+Отвечай ТОЛЬКО на русском языке, используя грамотную русскую речь.
+Будь эмпатичным, поддерживающим и профессиональным.
+Не используй английские слова или фразы в ответах.
+
+Если пользователь спрашивает на другом языке, вежливо попроси перейти на русский.
+Твои ответы должны быть полезными и содержательными.`;
 
 async function sendToAI(prompt) {
   // Находим элементы
@@ -62,7 +70,8 @@ async function sendToAI(prompt) {
         temperature: 0.7,
         num_predict: 512,
         top_p: 0.9,
-        repeat_penalty: 1.1
+        repeat_penalty: 1.1,
+        
       }
     };
     
