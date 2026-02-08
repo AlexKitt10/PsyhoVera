@@ -30,8 +30,8 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow "> <div class=" t-input-
 </style>
 
 <script>
-const OLLAMA_SERVER = 'http://62.109.8.203:11434';
-const MODEL_NAME = 'llama3.2:3b';
+const OLLAMA_SERVER = 'http://62.109.8.203:11435';
+const MODEL_NAME = 'deepseek-r1:latest';
 
 const CONTENT_FILTER = {
   forbiddenWords: [
@@ -45,7 +45,7 @@ const CONTENT_FILTER = {
     'незаконные вещества', 'экстремизм', 'терроризм'
   ],
   
-  minRussianRatio: 0.8
+  minRussianRatio: 0.9
 };
 
 let recognition = null;
@@ -372,7 +372,7 @@ function filterAIResponse(response) {
     /насили/i,
     /экстремист/i,
     /терроризм/i,
-    /пропаганди/i,
+    /пропаганда/i,
     /самоубийств/i,
     /суицид/i
   ];
@@ -422,8 +422,8 @@ async function sendToAI(prompt) {
   
   try {
     const formattedPrompt = `[INST] 
-Ты - психолог Вера. Отвечай ТОЛЬКО на русском языке.
-Если вопрос задан на другом языке, переведи его мысленно и отвечай на русском.
+Ты - квалифицированный психолог Вера. Отвечай ТОЛЬКО на русском языке.
+Если вопрос задан на другом языке, переведи его и отвечай на русском.
 
 ТВОИ ОБЯЗАТЕЛЬНЫЕ ПРАВИЛА:
 0. Отвечай в фориате рекомендаций и практических пожеланий клиену по устранению его
@@ -440,10 +440,11 @@ async function sendToAI(prompt) {
 
 Запрещено:
 - Отвечать на других языках
-- Использовать латиницу в основном тексте
 - Давать медицинские или юридические консультации
 - Рекомендовать что-либо опасное или незаконное
 - Быть осуждающим или критикующим
+
+Твой формат вывода: список рекомендаций и практических советов пользователю. Помоги ему справиться с трудностями, опираясь на знаниях в психологии и психотерапии.
 
 Вопрос клиента: "${prompt}"
 
@@ -504,7 +505,7 @@ async function sendToAI(prompt) {
         <strong style="color: #4CAF50;"> Вера говорит:</strong>
         <div style="margin-top: 10px; line-height: 1.6; font-size: 16px;">${formattedAnswer}</div>
         <div style="margin-top: 15px; font-size: 12px; color: #666; border-top: 1px solid #eee; padding-top: 10px;">
-          <em>✓ Ответ на русском языке | ✓ Контент проверен | ✓ Безопасный ответ</em>
+         
         </div>
       </div>
     `;
